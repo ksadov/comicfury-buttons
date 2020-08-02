@@ -1,0 +1,265 @@
+<div id="comicpage">
+    <div id="comicpage2">
+        <div class="comictitle">
+            [v:comictitle]
+            [c:usechapters] <!-- this one checks if the webcomic uses chapters -->
+                [c:haschapter] <!-- this one checks if the comic strip is in a chapter -->
+                    in <a href="[v:chapterlink]">[v:chaptername]</a>
+                [/]
+            [/]
+        </div>
+
+        <div class="comicdate">[v:posttime]</div>
+
+        <div class="comicnavigation">
+            <a href="/comics/first/" rel="start"><img src="http://comicfury.com/images/layouts/1/first.png" alt="first" /></a>
+
+            <a href="" id="backMedTop"><img src="http://testinglayout.cfw.me/files/prev3.png" alt="back 3 pages" /></a>
+            
+            <a href="[v:prevcomic]" rel="prev"><img src="http://comicfury.com/images/layouts/1/prev.png" alt="Previous" /></a>
+
+            <select onchange="jumpTo(this.options[selectedIndex].value);" class="comicdropdown">
+                [l:dropdown]
+                    [c:l.newgroup]
+                        <optgroup label="[v:l.grouplabel]">
+                    [/]
+
+                    <option value="[v:l.url]" [c:l.is_selected]selected="selected"[/] [c:l.is_disabled]disabled="disabled"[/]>[v:l.title]</option>
+
+                    [c:l.endgroup]
+                        </optgroup>
+                    [/]
+                [/]
+            </select>
+
+            <a href="[v:nextcomic]" rel="next"><img src="http://comicfury.com/images/layouts/1/next.png" alt="Next" /></a>
+   
+            <a href="" id="nextMedTop"><img src="http://testinglayout.cfw.me/files/next3.png" alt="next 3 pages" /></a> 
+            
+            <a href="/comics" rel="index"><img src="http://comicfury.com/images/layouts/1/latest.png" alt="Latest" /></a>
+        </div>
+
+        <div class="comicimage">
+            [v:comicimage]
+        </div>
+
+        <div id="saveplace">
+            <a href="#" onclick="savePlace(this,[v:comicid]);return false;">Save My Place</a>
+            |
+            <a href="#" onclick="loadPlace();return false;">Load My Place</a>
+        </div>
+
+        <br />
+
+        <div class="comicnavigation">
+            <a href="/comics/first/"><img src="http://comicfury.com/images/layouts/1/first.png" alt="first" /></a>
+
+            <a href="[v:prevcomic]"><img src="http://comicfury.com/images/layouts/1/prev.png" alt="Previous" /></a>
+
+            <a href="" id="backMedBottom"><img src="http://testinglayout.cfw.me/files/prev3.png" alt="back 3 pages" /></a> 
+
+	    <a href="" id="backBig"><img src="http://testinglayout.cfw.me/files/prev5.png" alt="back 5 pages" /></a>
+	    
+            <select onchange="jumpTo(this.options[selectedIndex].value);" class="comicdropdown">
+                [l:dropdown]
+                    [c:l.newgroup]
+                        <optgroup label="[v:l.grouplabel]">
+                    [/]
+
+                    <option value="[v:l.url]" [c:l.is_selected]selected="selected"[/] [c:l.is_disabled]disabled="disabled"[/]>[v:l.title]</option>
+
+                    [c:l.endgroup]
+                        </optgroup>
+                    [/]
+                [/]
+            </select>
+
+            <a href="[v:nextcomic]"><img src="http://comicfury.com/images/layouts/1/next.png" alt="Next" /></a>
+	    
+            <a href="" id="nextMedBottom"><img src="http://testinglayout.cfw.me/files/next3.png" alt="next 3 pages" /></a>
+	    
+	    <a href="" id="nextBig"><img src="http://testinglayout.cfw.me/files/next5.png" alt="next 5 pages" /></a>
+            
+            <a href="/comics"><img src="http://comicfury.com/images/layouts/1/latest.png" alt="Latest" /></a>
+        </div>
+
+	<script>
+	  const medAmount = 3;
+	  const bigAmount = 5;
+	  
+	  const currentPg = parseInt([f:js|v:comicnumber]);
+	  const latestPg = parseInt([f:js|v:comicsnum]);
+	  
+	  const medNextPg = Math.min(currentPg + medAmount, latestPg);
+	  const medBackPg = Math.max(currentPg - medAmount, 1);
+
+	  const bigNextPg = Math.min(currentPg + bigAmount, latestPg);
+	  const bigBackPg = Math.max(currentPg - bigAmount, 1)
+	  
+	  const backMedTop = document.getElementById("backMedTop");
+	  const backMedBottom = document.getElementById("backMedBottom");
+	  const nextMedTop = document.getElementById("nextMedTop");   
+	  const nextMedBottom = document.getElementById("nextMedBottom");
+
+	  const backBig = document.getElementById("backBig");
+	  const nextBig = document.getElementById("nextBig");
+  
+	  function urlFormat(pgNum) {
+	      return "http://testinglayout.cfw.me/comics/" + pgNum + "/";
+	  }
+	  
+	  if (currentPg == 1) {
+	      backMedTop.style.display = "none";
+	      backMedBottom.style.display = "none";
+	      backBig.style.display = "none";
+	  }
+	  else {
+	      backMedTop.setAttribute("href", urlFormat(medBackPg));
+	      backMedBottom.setAttribute("href", urlFormat(medBackPg));
+	      backBig.setAttribute("href", urlFormat(bigBackPg));
+	  }
+  
+	  if (currentPg == latestPg) {
+	      nextMedTop.style.display = "none";
+	      nextMedBottom.style.display = "none";
+	      nextBig.style.display = "none";
+	  }
+	  
+	  else {
+	      nextMedTop.setAttribute("href", urlFormat(medNextPg));
+	      nextMedBottom.setAttribute("href", urlFormat(medNextPg));
+	      nextBig.setAttribute("href", urlFormat(bigNextPg));
+	  }
+  
+	</script>
+
+        [c:allowratings]
+            <div class="comicratepanel">
+                <div class="ratepanelleft">
+                    Average Rating: [v:rating]
+                    <div class="numberofraters">
+                        Number of people who have voted: [v:votecount]
+                    </div>
+                </div>
+                <div class="rateplanelright">
+                    <a href="[v:ratelink]" onclick="rateWindow(event, '[v:ratelink]', [v:rate_jsdata]);" target="_blank">Rate this comic.</a>
+                </div>
+            </div>
+        [/]
+    </div>
+
+    [c:authornotes]
+        <div class="commentbox">
+
+            <div class="commenthead">Author Notes:</div>
+
+            [l:authornotes]
+                <div class="commentboxleft" id="[v:l.commentanchor]">
+                    <p>
+                        <a href="[v:l.profilelink]">[v:l.authorname]</a>
+                    </p>
+
+                    <p>
+                        [c:l.avatar]<img src="[v:l.avatar]" alt="[v:l.authorname]" />[/]
+                    </p>
+
+                    <p class="[v:l.controlclass]">
+                        <span class="[v:l.editclass]">
+                            <a href="[v:l.editlink]&notitle" onclick="commentWindow(event, '[v:l.editlink]', false, [v:l.edit_jsdata]);" target="_blank">edit</a>
+                        </span>
+
+                        <span class="[v:l.deleteclass]">
+                            <a href="[v:l.deletelink]" onclick="commentWindow(event, '[v:l.deletelink]', false, [v:l.delete_jsdata]);" target="_blank">delete</a>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="commentboxright">
+                    [v:l.posttime]
+                    <p>
+                        [v:l.comment]
+                    </p>
+                </div>
+
+                <div class="commentboxclear"></div>
+            [/]
+        </div>
+    [/]
+
+
+    [c:showpermalinks]
+        <div id="permalinkbox">
+
+            <div class="permalinkhead">Permalinks:</div>
+
+            <b>Permalink to this Page:</b><br />
+
+            <div class="permalinkcode">
+                [v:permalink]
+            </div>
+
+            <br />
+
+
+            [c:comicimagetype=image]
+                <b>Embed comic using this code:</b><br />
+                <div class="permalinkcode">
+                    &lt;a href=&quot;[v:permalink]&quot;>&lt;img src=&quot;[v:comicimageurl]&quot; alt=&quot;[v:webcomicname] - [v:comictitle]&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;
+                </div>
+                <br />
+            [/]
+        </div>
+    [/]
+
+
+    [c:showcomments]
+        [c:comments]
+            <div class="commentbox">
+                <div class="commenthead">Comments:</div>
+                [l:comments]
+                    <div class="commentboxleft [c:l.is_reply]reply[/]" id="[v:l.commentanchor]">
+                        <p>
+                            <a href="[v:l.profilelink]"><b>[v:l.authorname]</b></a>
+                        </p>
+
+                        <p>
+                            [c:l.avatar]<img src="[v:l.avatar]" alt="[v:l.authorname]" />[/]
+                        </p>
+
+                        <p class="[v:l.controlclass]">
+                            <span class="[v:l.editclass]">
+                                <a href="[v:l.editlink]&notitle" onclick="commentWindow(event, '[v:l.editlink]', false, [v:l.edit_jsdata]);" target="_blank">edit</a>
+                            </span>
+
+                            <span class="[v:l.deleteclass]">
+                                <a href="[v:l.deletelink]" onclick="commentWindow(event, '[v:l.deletelink]', false, [v:l.delete_jsdata]);" target="_blank">delete</a>
+                                <br />
+                            </span>
+
+                            <a href="[v:l.replylink_nopopup]&notitle" onclick="commentWindow(event, '[v:l.replylink]', false, [v:l.reply_jsdata]);" target="_blank">reply</a>
+                        </p>
+                    </div>
+
+                    <div class="commentboxright">
+                        [v:l.posttime]
+                        <p>
+                            [v:l.comment]
+                        </p>
+                    </div>
+
+                    <div class="commentboxclear"></div>
+                [/]
+            </div>
+        [/]
+    [/]
+
+    [c:allowcomments]
+        <div>
+            <a href="[v:commentlink_nopopup]&notitle"  onclick="commentWindow(event, '[v:commentlink]', false, [v:comment_jsdata]);" target="_blank">Leave a Comment</a>
+
+            [c:!allowguestcomments]
+                (You have to be registered at <a href="https://comicfury.com">ComicFury</a> to leave a comment!)
+            [/]
+        </div>
+    [/]
+</div>
