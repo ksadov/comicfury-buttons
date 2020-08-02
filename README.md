@@ -1,12 +1,12 @@
 # comicfury-buttons
 A tutorial on adding extra navigation buttons to a ComicFury layout.
 
-[examplelayout.html](https://github.com/ksadov/comicfury-buttons/blob/master/examplelayout.html) contains ComicFury's default "Rainbow tables" comic page layout customized with additional nativation buttons. You can see it in action [here.](http://testinglayout.cfw.me/comics/). Adding new navigation buttons requires adding two components: the html tags corresponding to each button, and the JavaScript tag that controls their behavior. You'll want to insert them into your "Comic Page" html code, as seen in your Webcomic Management console:
+[examplelayout.html](https://github.com/ksadov/comicfury-buttons/blob/master/examplelayout.html) contains ComicFury's default "Rainbow tables" comic page layout customized with additional nativation buttons. You can see it in action [here.](http://testinglayout.cfw.me/comics/). Adding new navigation buttons requires adding two components: the HTML tags corresponding to each button, and the JavaScript tag that controls their behavior. You'll want to insert them into your "Comic Page" HTML code, as seen in your Webcomic Management console:
 
 ![Screenshot of the ComicFury Webcomic Management console, showing the "Comic Page" layout section](cfpagelayout.png)
 
-## html
-The button are [hyperlinks](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks) with a blank `href` (the actual link destination is constructed with JavaScript), an `id` field, an image (which you can replace with your own image address uploaded via ComicFury's "Upload Extra Files" utility) and an `alt` text description. The example code adds two kinds of navigation buttons: those that jump 3 pages, and those that jump 5 pages. I inserted the html for the 3 page navs in the top and bottom navigation bars, and the 5 page navs just along the bottom bar. You can change where the buttons are inserted in the layout, `id`, image address and `alt` to fit your layout and page jump size, but make sure that the new `id` tags are consistent with the JavaScript code below that uses the `id` to retrieve the elements.
+## HTML
+The button are [hyperlinks](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Creating_hyperlinks) with a blank `href` (the actual link destination is constructed with JavaScript), an `id` field, an image (which you can replace with your own image address uploaded via ComicFury's "Upload Extra Files" utility) and an `alt` text description. The example code adds two kinds of navigation buttons: those that jump 3 pages, and those that jump 5 pages. I inserted the HTML for the 3 page navs in the top and bottom navigation bars, and the 5 page navs just along the bottom bar. You can change where the buttons are inserted in the layout, `id`, image address and `alt` to fit your layout and page jump size, but make sure that the new `id` tags are consistent with the JavaScript code below that uses the `id` to retrieve the elements.
 
 Line 15, 3 page back button inserted between the default "first" button and the default "previous" button:
 ```
@@ -36,7 +36,7 @@ Lines 79 - 81, 3 page next button and 5 page next button inserted between the de
 
 ## JavaScript
 
-The script that controls the new button behavior is inserted below the html tags, on lines 85 - 134. When adding your own JavaScript, don't forget to enclose it in `<script>` tags.
+The script that controls the new button behavior is inserted below the HTML tags, on lines 85 - 134. When adding your own JavaScript, don't forget to enclose it in `<script>` tags.
 
 First, we assign the value of our jumps to variables:
 ```
@@ -61,7 +61,7 @@ What happens if we try to jump forward 5 pages on the second-to-last page, or tr
 	  const bigBackPg = Math.max(currentPg - bigAmount, 1)
 ```
 
-Then we use the id tags from our new html to retrieve the buttons and assign them to JavaScript variables:
+Then we use the id tags from our new HTML to retrieve the buttons and assign them to JavaScript variables:
 ```
 	  const backMedTop = document.getElementById("backMedTop");
 	  const backMedBottom = document.getElementById("backMedBottom");
