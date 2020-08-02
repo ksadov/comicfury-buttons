@@ -1,9 +1,9 @@
 # comicfury-buttons
 A tutorial on adding extra navigation buttons to a ComicFury layout.
 
-examplelayout.html contains ComicFury's default "Rainbow tables" comic page layout customized with additional nativation buttons. You can see it in action [here.](http://testinglayout.cfw.me/comics/). Adding new navigation buttons requires adding two components: the html tags corresponding to each button, and the JavaScript tag that controls their behavior. 
+[examplelayout.html](https://github.com/ksadov/comicfury-buttons/blob/master/examplelayout.html) contains ComicFury's default "Rainbow tables" comic page layout customized with additional nativation buttons. You can see it in action [here.](http://testinglayout.cfw.me/comics/). Adding new navigation buttons requires adding two components: the html tags corresponding to each button, and the JavaScript tag that controls their behavior. 
 
-# html
+## html
 The button are hyperlinks with a blank `href` (the actual link destination is constructed with JavaScript), an `id` field, an image address (which you can replace with your own image uploaded via ComicFury's "Upload Extra Files" utility) and an `alt` text description. The example code adds two kinds of navigation buttons: those that jump 3 pages, and those that jump 5 pages. I inserted the html for the 3 page navs in the top and bottom navigation bars, and the 5 page navs just along the bottom bar. You can change where the buttons are inserted in the layout, `id`, image address and `alt` to fit your layout and page jump size, but make sure that the new `id` tags are consistent with the JavaScript code below that uses the `id` to retrieve the elements.
 
 Line 15, 3 page back button inserted between the default "first" button and the default "previous" button:
@@ -32,9 +32,9 @@ Lines 79 - 81, 3 page next button and 5 page next button inserted between the de
 <a href="" id="nextBig"><img src="http://testinglayout.cfw.me/files/next5.png" alt="next 5 pages" /></a>
 ```
 
-# JavaScript
+## JavaScript
 
-The script that controls the new button behavior is inserted below the html tags, on lines 85 - 134.When adding your own JavaScript, don't forget to enclose it in `<script>` tags.
+The script that controls the new button behavior is inserted below the html tags, on lines 85 - 134. When adding your own JavaScript, don't forget to enclose it in `<script>` tags.
 
 First, we assign the value of our jumps to variables:
 ```
